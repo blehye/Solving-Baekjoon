@@ -5,14 +5,16 @@ from re import findall
 
 if __name__ == "__main__":
     cur_dir = os.path.abspath(os.curdir)
-    FOLDER = "baekjoon"
+    FOLDER = "/baekjoon"
     os.chdir(cur_dir.split(FOLDER)[0])
 
     PATH_TARGET = os.path.abspath(os.curdir)
 
+    FOLDER = "baekjoon"
     repo = Repo(PATH_TARGET)
     repo.remotes.origin.pull()
     filenames = [filename for filename in repo.untracked_files if filename.startswith(f"{FOLDER}/")]
+    print(filenames)
     for filename in filenames:
         try:
             fileNum = findall("[0-9]+", os.path.basename(filename))[0]
